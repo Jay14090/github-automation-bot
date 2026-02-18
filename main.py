@@ -7,7 +7,8 @@ import datetime
 def run_bot():
     load_dotenv()
 
-    TOKEN = os.getenv("GITHUB_TOKEN")
+    TOKEN = os.getenv("secret")
+
 
     if not TOKEN:
         raise Exception("GitHub token not found.")
