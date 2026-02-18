@@ -1,0 +1,29 @@
+name: GitHub Automation Bot
+
+on:
+  schedule:
+    - cron: "0 12 * * *"   # Runs daily at 12:00 UTC
+  workflow_dispatch:       # Allows manual trigger
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install PyGithub python-dotenv
+
+      - name: Run bot
+        env:
+          secret: ${{ secrets.secret }}
+        run: |
+          python main.py
